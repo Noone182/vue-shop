@@ -1,8 +1,5 @@
 <template>
-  <h1>
-    123123123
-  </h1>
-  <v-main-wrapper></v-main-wrapper>
+  <v-main-wrapper />
 </template>
 
 <script>
