@@ -3,7 +3,7 @@
     <img class="v-catalog-item__image" :src="require('../assets/images/' + product_data.image)" alt="img">
     <p class="v-catalog-item__name">{{ product_data.name }}</p>
     <p class="v-catalog-item__price">Price: {{ product_data.price }} Р.</p>
-    <button class="v-catalog-item__add_to_cart_btn btn" @click="sendDataToParent">Add to cart</button>
+    <button class="v-catalog-item__add_to_cart_btn btn" @click="addToCart">Add to cart</button>
   </div>
 </template>
 
@@ -23,8 +23,8 @@
     },
     computed: {},
     methods: {
-      sendDataToParent() {
-        this.$emit('send-data-to-parent', this.product_data.article)
+      addToCart() {
+        this.$emit('addToCart', this.product_data)
       }
     }
   }
@@ -36,6 +36,7 @@
     box-shadow: 0 0 8px 0 #e0e0e0;
     padding: $padding*2;
     margin-bottom: $margin*2;
+
     &__image {
       width: 100px;
     }
