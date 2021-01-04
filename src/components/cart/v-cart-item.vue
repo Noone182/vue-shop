@@ -1,6 +1,6 @@
 <template>
   <div class="v-cart-item">
-        <img class="v-cart-item__image" :src="require('../assets/images/' + cart_item_data.image)" alt="img">
+        <img class="v-cart-item__image" :src="require('../../assets/images/' + cart_item_data.image)" alt="img">
         <div class="v-cart-item__info">
           <p>{{cart_item_data.name}}</p>
           <p>{{cart_item_data.price}}</p>
@@ -8,13 +8,19 @@
         </div>
         <div class="v-cart-item__quantity">
           <p>Qty:</p>
-          {{cart_item_data.quantity}}
+          <span>
+            <span class="quantity__btn" @click="decrementItem">-</span>
+            {{cart_item_data.quantity}}
+            <span class="quantity__btn" @click="incrementItem">+</span>
+          </span>
+
         </div>
         <button @click="deleteFromCart">Delete</button>
   </div>
 </template>
 
 <script>
+
 export default {
   name: "v-cart-item",
   props: {
@@ -32,7 +38,13 @@ export default {
   methods: {
     deleteFromCart() {
       this.$emit('deleteFromCart')
-    }
+    },
+      decrementItem() {
+        this.$emit('decrement')
+      },
+      incrementItem() {
+        this.$emit('increment')
+      }
   }
 
 }

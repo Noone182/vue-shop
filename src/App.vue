@@ -1,5 +1,8 @@
 <template>
-  <v-main-wrapper />
+  <div id="app">
+      <v-main-wrapper />
+  </div>
+
 </template>
 
 <script>
