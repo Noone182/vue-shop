@@ -5,11 +5,14 @@
     </router-link>
    
     <h1>Catalog</h1>
-    <v-select
-      :selected="selected"
-      :options="categories"
-      @select="sortByCategories"
-    />
+    <div class="filters">
+      <v-select
+          :selected="selected"
+          :options="categories"
+          @select="sortByCategories"
+      />
+    </div>
+
     <div class="v-catalog__list">
       <v-catalog-item 
         v-for="product in filteredProducts"
@@ -55,7 +58,7 @@ import vSelect from '../v-select.vue';
         if (this.sortedProducts.length) {
           return this.sortedProducts
         } else {
-          return this.PRODUCTS
+          return  this.PRODUCTS
         }
       }
     },
@@ -68,9 +71,9 @@ import vSelect from '../v-select.vue';
         this.ADD_TO_CART(data)
       },
       sortByCategories(category) {
-        this.sortedProducts = [];
         let vm = this;
-        this.PRODUCTS.map(function (item){
+        this.sortedProducts = []
+        this.PRODUCTS.map(function (item) {
           if (item.category === category.name) {
             vm.sortedProducts.push(item);
           }
@@ -80,6 +83,11 @@ import vSelect from '../v-select.vue';
     },
     mounted() {
       this.GET_PRODUCTS_FROM_API()
+        .then((response) => {
+            if (response.data) {
+                console.log('hello')
+            }
+        })
     }
   }
 </script>
@@ -107,25 +115,8 @@ import vSelect from '../v-select.vue';
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 20px;
   }
 
-  .range-slider {
-    width: 200px;
-    margin: auto 16px;
-    text-align: center;
-    position: relative;
-  }
 
-  .range-slider svg, .range-slider input[type=range] {
-    position: absolute;
-    left: 0;
-    bottom: 0;
-  }
-
-  input[type=range]::-webkit-slider-thumb {
-    z-index: 2;
-    position: relative;
-    top: 2px;
-    margin-top: -7px;
-  }
 </style>
